@@ -16,7 +16,12 @@ Aktuell sind zwei Variationen (*Sans*, *Sans SemiCondensed*) in drei Stilen (*Re
 
 ## Installation und Nutzung
 
-Die aktuelle Version ist unter [Releases](https://github.com/idiotikon-ch/nossikon/releases) zum Download erhältlich. Für die lokale Verwendung sind TrueType-Fonts verfügbar, für die Verwendung auf Websites verschiedene Webfont-Formate, inkl. CSS-Stylesheet für den Import:
+Die aktuelle Version ist unter [Releases](https://github.com/idiotikon-ch/nossikon/releases) zum Download erhältlich.
+
+{:.click-me}
+[Download](https://github.com/idiotikon-ch/nossikon/releases)
+
+Für die lokale Verwendung sind TrueType-Fonts verfügbar, für die Verwendung auf Websites verschiedene Webfont-Formate, inkl. CSS-Stylesheet für den Import:
 
 ```css
 @import url('nossikon.css');

@@ -2,7 +2,7 @@
 
 ## Mapping-Tabellen
 
-Für die folgenden Fonts liegen Mapping-Tabellen als *tab-separated values* (TSV) vor:
+Für die folgenden Fonts liegen [Mapping-Tabellen](https://github.com/idiotikon-ch/nossikon/tree/master/mappings) als *tab-separated values* (TSV) vor:
 
 - *Adlikon* (Zürcher Namenbuch)
 - *Andhausen* (phonetische, historische und indogermanische Zeichen; diverse Projekte)
