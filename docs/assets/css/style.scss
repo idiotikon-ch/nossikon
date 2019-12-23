@@ -1,0 +1,31 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+@import url('fonts/nossikon.css');
+
+.nossikon {
+    font-family: 'Nossikon Sans';
+}
+
+.nossikon-condensed {
+    font-family: 'Nossikon Sans SemiCondensed';
+}
+
+.char-display {
+    font-size: 2em;
+}
+
+.click-me {
+    font-weight: bold;
+    font-variant: all-petite-caps;
+    font-size: 1.2em;
+    text-align: center;
+}
+.click-me a::before {
+    content: '▶ ';
+}
+.click-me a::after {
+    content: ' ◀';
+}
