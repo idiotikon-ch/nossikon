@@ -1,6 +1,6 @@
 # Nossikon
 
-Unicode-Fonts mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung, basierend auf [Noto](https://github.com/googlefonts/noto-fonts).
+Unicode-Fonts mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung und die deutschsprachige Dialektologie, basierend auf [Noto](https://github.com/googlefonts/noto-fonts).
 
 Aktuell sind zwei Variationen (*Sans*, *Sans SemiCondensed*) in drei Stilen (*Regular*, *Italic*, *Bold*) verfügbar.
 
@@ -9,7 +9,7 @@ Aktuell sind zwei Variationen (*Sans*, *Sans SemiCondensed*) in drei Stilen (*Re
 
 ## Ziele
 
-- Kodierung aller Zeichen, die konventionell in der schweizerischen Ortsnamenforschung verwendet werden
+- Kodierung aller Zeichen, die konventionell in der schweizerischen Ortsnamenforschung verwendet werden (u.a. Unterstützung für Teuthonista)
 - möglichst vollständige Abdeckung und Mappings von Zeichensätzen in bisher verwendeten Fonts
 - (wo immer möglich) Kompatibilität mit dem aktuellen [Unicode-Standard](https://unicode.org/main.html)
 - Benutzung als Webfont für die [Online-Datenbank](https://search.ortsnamen.ch/) des [Portals der schweizerischen Ortsnamenforschung](https://www.ortsnamen.ch/)
