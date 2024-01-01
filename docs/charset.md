@@ -11,7 +11,9 @@ Für die bessere Darstellung einiger kombinierender Zeichen wurden Ligaturen ein
 | LATIN SMALL LETTER J + COMBINING TILDE OVERLAY | *j̴*{:.nossikon}{:.char-display} |
 | COMBINING DOT ABOVE + COMBINING DOT ABOVE | *_̇̇*{:.nossikon}{:.char-display} |
 | COMBINING COMMA ABOVE + COMBINING ACUTE ACCENT | *_̓́*{:.nossikon}{:.char-display} |
-| MODIFIER LETTER SMALL A + MODIFIER LETTER SMALL E | *ᵃᵉ*{:.nossikon}{:.char-display} |
+| MODIFIER LETTER SMALL A + MODIFIER LETTER SMALL E <br> (**HINWEIS**: Ab Unicode 14.0 sollte statt dieser Ligatur das Zeichen "MODIFIER LETTER SMALL AE" verwendet werden) | *ᵃᵉ*{:.nossikon}{:.char-display} |
+| MODIFIER LETTER SMALL A + COMBINING DIAERESIS | *ᵃ̈*{:.nossikon}{:.char-display} |
+| MODIFIER LETTER SMALL O + COMBINING DIAERESIS | *ᵒ̈*{:.nossikon}{:.char-display} |
 | MODIFIER LETTER SMALL U + COMBINING DIAERESIS | *ᵘ̈*{:.nossikon}{:.char-display} |
 | MODIFIER LETTER SMALL U + COMBINING INVERTED BREVE BELOW | *ᵘ̯*{:.nossikon}{:.char-display} |
 | MODIFIER LETTER SMALL I + COMBINING INVERTED BREVE BELOW | *ⁱ̯*{:.nossikon}{:.char-display} |
