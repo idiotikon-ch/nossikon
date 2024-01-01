@@ -1,6 +1,6 @@
 # Nossikon
 
-Unicode-Fonts mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung und die deutschsprachige Dialektologie (u.a. Unterstützung für Teuthonista), basierend auf [Noto](https://github.com/googlefonts/noto-fonts).
+Unicode-Fonts mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung und die deutschsprachige Dialektologie (u.a. Unterstützung für Teuthonista), basierend auf [Noto](https://github.com/notofonts/latin-greek-cyrillic).
 
 ## Dokumentation
 
@@ -8,4 +8,4 @@ Unicode-Fonts mit phonetischen und historischen Zeichen für die schweizerische 
 
 ## Lizenz
 
-Die Nossikon-Fonts basieren auf [Noto-Fonts](https://github.com/googlefonts/noto-fonts), die unter der [SIL Open Font License (OFL) v1.1](http://scripts.sil.org/OFL) veröffentlicht sind. Alle Nossikon-Fonts sind ebenfalls unter der [SIL Open Font License (OFL) v1.1](http://scripts.sil.org/OFL) verfügbar.
+Die Nossikon-Fonts basieren auf [Noto-Fonts](https://github.com/notofonts/latin-greek-cyrillic), die unter der [SIL Open Font License (OFL) v1.1](http://scripts.sil.org/OFL) veröffentlicht sind. Alle Nossikon-Fonts sind ebenfalls unter der [SIL Open Font License (OFL) v1.1](http://scripts.sil.org/OFL) verfügbar.
