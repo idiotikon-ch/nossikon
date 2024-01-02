@@ -1,6 +1,6 @@
 # Nossikon
 
-Unicode-Fonts mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung und die deutschsprachige Dialektologie, basierend auf [Noto](https://github.com/googlefonts/noto-fonts).
+Unicode-Fonts mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung und die deutschsprachige Dialektologie, basierend auf [Noto](https://github.com/notofonts/latin-greek-cyrillic).
 
 Aktuell sind zwei Variationen (*Sans*, *Sans SemiCondensed*) in drei Stilen (*Regular*, *Italic*, *Bold*) verfügbar.
 
@@ -45,7 +45,7 @@ Resultat:
 
 ## Unterstützte Zeichen
 
-Zusätzlich zur umfangreichen Unicode-Abdeckung durch [Noto](https://github.com/googlefonts/noto-fonts) sind in Nossikon zusätzliche Zeichen und Ligaturen enthalten.
+Zusätzlich zur umfangreichen Unicode-Abdeckung durch [Noto](https://github.com/notofonts/latin-greek-cyrillic) sind in Nossikon zusätzliche Zeichen und Ligaturen enthalten.
 
 {:.click-me}
 [mehr Informationen zum Zeichensatz](./charset.html)
@@ -59,4 +59,4 @@ Für zahlreiche (nicht Unicode-kompatible) Fonts aus regionalen Forschungsprojek
 
 ## Lizenz
 
-Die Nossikon-Fonts basieren auf [Noto-Fonts](https://github.com/googlefonts/noto-fonts), die unter der [SIL Open Font License (OFL) v1.1](http://scripts.sil.org/OFL) veröffentlicht sind. Alle Nossikon-Fonts sind ebenfalls unter der [SIL Open Font License (OFL) v1.1](http://scripts.sil.org/OFL) verfügbar.
+Die Nossikon-Fonts basieren auf [Noto-Fonts](https://github.com/notofonts/latin-greek-cyrillic), die unter der [SIL Open Font License (OFL) v1.1](http://scripts.sil.org/OFL) veröffentlicht sind. Alle Nossikon-Fonts sind ebenfalls unter der [SIL Open Font License (OFL) v1.1](http://scripts.sil.org/OFL) verfügbar.

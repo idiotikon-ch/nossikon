@@ -1,6 +1,6 @@
 # Zeichensatz
 
-Die aktuelle Version der Fonts enthalten den gesamten Unicode-Zeichensatz aus [Noto](https://github.com/googlefonts/noto-fonts) (inklusive Teuthonista-Lautschrift), mit den folgenden Änderungen:
+Die aktuelle Version der Fonts enthalten den gesamten Unicode-Zeichensatz aus [Noto (Latin/Greek/Cyrillic)](https://github.com/notofonts/latin-greek-cyrillic) (inklusive Teuthonista-Lautschrift), mit den folgenden Änderungen:
 
 ## Ligaturen
 
