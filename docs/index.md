@@ -2,7 +2,7 @@
 
 Unicode-Fonts mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung und die deutschsprachige Dialektologie, basierend auf [Noto](https://github.com/notofonts/latin-greek-cyrillic).
 
-Aktuell sind zwei Variationen (*Sans*, *Sans SemiCondensed*) in drei Stilen (*Regular*, *Italic*, *Bold*) verfügbar.
+*Nossikon Sans* ist als Variable Font verfügbar: stufenlos in allen Gewichten (100–900) und Breiten (62.5–100 %), jeweils aufrecht und kursiv.
 
 {:.click-me}
 [Beispiele](./samples.html)
@@ -21,7 +21,7 @@ Die aktuelle Version ist unter [Releases](https://github.com/idiotikon-ch/nossik
 {:.click-me}
 [Download](https://github.com/idiotikon-ch/nossikon/releases)
 
-Für die lokale Verwendung sind TrueType-Fonts verfügbar, für die Verwendung auf Websites verschiedene Webfont-Formate, inkl. CSS-Stylesheet für den Import:
+Für die lokale Verwendung gibt es den Variable Font als TrueType-Datei sowie ein Paket mit statischen TrueType-Fonts aller Gewichte und Breiten (für Programme, die Variable Fonts nicht oder nur eingeschränkt unterstützen). Für die Verwendung auf Websites gibt es WOFF2-Webfonts inkl. CSS-Stylesheet für den Import:
 
 ```css
 @import url('nossikon.css');
@@ -29,7 +29,15 @@ Für die lokale Verwendung sind TrueType-Fonts verfügbar, für die Verwendung a
 .nossikon {
     font-family: 'Nossikon Sans';
 }
+
+.nossikon-semibold-condensed {
+    font-family: 'Nossikon Sans';
+    font-weight: 600;
+    font-stretch: 87.5%;
+}
 ```
+
+Gewicht und Breite lassen sich über `font-weight` (100–900) und `font-stretch` (62.5 %–100 %) beliebig einstellen. Die bisherige Familie `'Nossikon Sans SemiCondensed'` ist im Stylesheet weiterhin definiert und entspricht `'Nossikon Sans'` mit `font-stretch: 87.5%`.
 
 oder Einbindung in HTML:
 

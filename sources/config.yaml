@@ -1,0 +1,14 @@
+familyName: Nossikon Sans
+sources:
+  - ../build/ufo/NossikonSans.designspace
+  - ../build/ufo/NossikonSans-Italic.designspace
+buildVariable: true
+buildStatic: true
+buildOTF: false
+buildWebfont: true
+buildSmallCap: false
+autohintTTF: true
+outputDir: ../build/fonts
+axisOrder:
+  - wdth
+  - wght
