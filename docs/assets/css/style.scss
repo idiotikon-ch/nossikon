@@ -10,7 +10,13 @@
 }
 
 .nossikon-condensed {
-    font-family: 'Nossikon Sans SemiCondensed';
+    font-family: 'Nossikon Sans';
+    font-stretch: 87.5%;
+}
+
+.axis-controls label {
+    display: inline-block;
+    margin-right: 1.5em;
 }
 
 .char-display {

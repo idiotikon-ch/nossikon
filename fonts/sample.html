@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nossikon Sans</title>
+<link rel="stylesheet" href="nossikon.css">
+<style>
+    :root {
+        --bg: #fbfaf7;
+        --fg: #1d1c1a;
+        --muted: #6d6a63;
+        --line: #dedad2;
+        --accent: #8a2b1d;
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: #1a1918;
+            --fg: #ecebe7;
+            --muted: #a09c94;
+            --line: #3a3835;
+            --accent: #e08a74;
+        }
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: 'Nossikon Sans', sans-serif;
+        line-height: 1.5;
+    }
+    main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 48px 16px 96px;
+    }
+    h1 {
+        font-size: clamp(48px, 9vw, 112px);
+        font-weight: 800;
+        font-stretch: 87.5%;
+        line-height: 1;
+        margin: 0 0 12px;
+        letter-spacing: -0.01em;
+    }
+    .lead {
+        font-size: 20px;
+        color: var(--muted);
+        max-width: 46em;
+        margin: 0 0 56px;
+    }
+    h2 {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        border-top: 1px solid var(--line);
+        padding-top: 16px;
+        margin: 64px 0 24px;
+    }
+    .label {
+        font-size: 13px;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+    }
+    .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px 32px;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+    .controls label {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 14px;
+    }
+    .controls output {
+        min-width: 3.5em;
+        font-variant-numeric: tabular-nums;
+        color: var(--muted);
+    }
+    input[type=range] { width: 200px; accent-color: var(--accent); }
+    input[type=checkbox] { accent-color: var(--accent); }
+    #playground {
+        font-size: clamp(32px, 6vw, 64px);
+        line-height: 1.25;
+        outline: none;
+        border-bottom: 1px dashed var(--line);
+        padding-bottom: 8px;
+        overflow-wrap: anywhere;
+    }
+    .examples p {
+        font-size: clamp(22px, 3.5vw, 34px);
+        margin: 0 0 8px;
+        overflow-wrap: anywhere;
+    }
+    .weights .row {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 16px;
+        align-items: baseline;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--line);
+    }
+    .weights .text {
+        font-size: clamp(20px, 3vw, 30px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .widths {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+    }
+    .widths .text { font-size: 34px; line-height: 1.2; }
+    .chars {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+    .char {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 12px;
+        text-align: center;
+    }
+    .char .glyph {
+        font-size: 56px;
+        line-height: 1.3;
+    }
+    .char .label { display: block; }
+    .compare {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 12px;
+    }
+    .compare .char .glyph { font-size: 48px; }
+    footer {
+        margin-top: 64px;
+        font-size: 14px;
+        color: var(--muted);
+    }
+    a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+    <h1>Nossikon Sans</h1>
+    <p class="lead">Variable Font mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung und die deutschsprachige Dialektologie, basierend auf Noto Sans. Gewicht 100–900, Breite 62.5–100 %, aufrecht und kursiv.</p>
+
+    <h2>Ausprobieren</h2>
+    <div class="controls">
+        <label>Gewicht <input type="range" id="wght" min="100" max="900" value="400"><output id="wght-out">400</output></label>
+        <label>Breite <input type="range" id="wdth" min="62.5" max="100" step="0.5" value="100"><output id="wdth-out">100 %</output></label>
+        <label><input type="checkbox" id="ital"> kursiv</label>
+    </div>
+    <div id="playground" contenteditable="true" spellcheck="false">əm tu᪷rən ọbə, vọm rọ̄utətúrᵃᵉ</div>
+
+    <h2>Beispiele aus der Ortsnamen-Datenbank</h2>
+    <div class="examples">
+        <p><i>əm tu᪷rən ọbə, vọm rọ̄utətúrᵃᵉ</i></p>
+        <p><i>í᪷n̄dərlaχχə</i></p>
+        <p>[ivɛʀdɔ̃], [ɛ̃ vɛrˈdɔ̃]</p>
+        <p><i>*podjo &gt; *püög̓́ &gt; *púog̓́ &gt; *púəg̓́</i></p>
+        <p><i>de Schoͤngoͤwe, apud Schongoͧwe</i></p>
+    </div>
+
+    <h2>Gewichte</h2>
+    <div class="weights" id="weights"></div>
+
+    <h2>Breiten</h2>
+    <div class="widths" id="widths"></div>
+
+    <h2>Ligaturen</h2>
+    <div class="chars" id="ligatures"></div>
+
+    <h2>Private Use</h2>
+    <div class="chars">
+        <div class="char"><div class="glyph">&#xECAC;&#x0301;</div><span class="label">U+ECAC ou-Ligatur</span></div>
+    </div>
+
+    <h2>Kombinierende Kleinbuchstaben</h2>
+    <div class="compare" id="combining"></div>
+
+    <footer>
+        <p>Lizenz: <a href="https://openfontlicense.org">SIL Open Font License 1.1</a> · <a href="https://github.com/idiotikon-ch/nossikon">github.com/idiotikon-ch/nossikon</a></p>
+    </footer>
+</main>
+<script>
+    const sample = 'əm tu᪷rən ọbə, vọm rọ̄utətúrᵃᵉ, Schoͤngoͧwe';
+    const weights = [[100, 'Thin'], [200, 'ExtraLight'], [300, 'Light'], [400, 'Regular'], [500, 'Medium'], [600, 'SemiBold'], [700, 'Bold'], [800, 'ExtraBold'], [900, 'Black']];
+    const widths = [[62.5, 'ExtraCondensed'], [75, 'Condensed'], [87.5, 'SemiCondensed'], [100, 'Normal']];
+    const ligatures = [
+        ['j̴', 'j + U+0334'], ['◌̇̇', 'U+0307 + U+0307'], ['◌̓́', 'U+0313 + U+0301'],
+        ['ᵃᵉ', 'U+1D43 + U+1D49'], ['ᵃ̈', 'U+1D43 + U+0308'], ['ᵒ̈', 'U+1D52 + U+0308'],
+        ['ᵘ̈', 'U+1D58 + U+0308'], ['ᵘ̯', 'U+1D58 + U+032F'], ['ⁱ̯', 'U+2071 + U+032F'],
+    ];
+
+    const el = (tag, cls, text) => {
+        const e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (text !== undefined) e.textContent = text;
+        return e;
+    };
+
+    const weightsEl = document.getElementById('weights');
+    for (const [w, name] of weights) {
+        const row = el('div', 'row');
+        row.append(el('span', 'label', `${w} ${name}`));
+        const t = el('span', 'text', sample);
+        t.style.fontWeight = w;
+        row.append(t);
+        weightsEl.append(row);
+    }
+
+    const widthsEl = document.getElementById('widths');
+    for (const [w, name] of widths) {
+        const box = el('div');
+        box.append(el('div', 'label', `${w} % ${name}`));
+        const t = el('div', 'text', 'Schoͤngoͧwe ᵃᵉ');
+        t.style.fontStretch = `${w}%`;
+        box.append(t);
+        const ti = el('div', 'text', 'Schoͤngoͧwe ᵃᵉ');
+        ti.style.fontStretch = `${w}%`;
+        ti.style.fontStyle = 'italic';
+        box.append(ti);
+        widthsEl.append(box);
+    }
+
+    const ligEl = document.getElementById('ligatures');
+    for (const [glyph, label] of ligatures) {
+        const c = el('div', 'char');
+        c.append(el('div', 'glyph', glyph), el('span', 'label', label));
+        ligEl.append(c);
+    }
+
+    const combEl = document.getElementById('combining');
+    for (let cp = 0x363; cp <= 0x36F; cp++) {
+        const c = el('div', 'char');
+        c.append(el('div', 'glyph', 'o' + String.fromCodePoint(cp)),
+                 el('span', 'label', 'U+' + cp.toString(16).toUpperCase().padStart(4, '0')));
+        combEl.append(c);
+    }
+
+    const pg = document.getElementById('playground');
+    const wght = document.getElementById('wght');
+    const wdth = document.getElementById('wdth');
+    const ital = document.getElementById('ital');
+    const update = () => {
+        for (const target of [pg, weightsEl, widthsEl, ligEl, combEl]) {
+            target.style.fontStyle = ital.checked ? 'italic' : 'normal';
+        }
+        pg.style.fontWeight = wght.value;
+        pg.style.fontStretch = `${wdth.value}%`;
+        for (const t of document.querySelectorAll('.chars .glyph, .compare .glyph')) {
+            t.style.fontWeight = wght.value;
+            t.style.fontStretch = `${wdth.value}%`;
+        }
+        document.getElementById('wght-out').textContent = wght.value;
+        document.getElementById('wdth-out').textContent = `${wdth.value} %`;
+    };
+    for (const input of [wght, wdth, ital]) input.addEventListener('input', update);
+    update();
+</script>
+</body>
+</html>

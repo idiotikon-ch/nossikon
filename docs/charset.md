@@ -28,7 +28,7 @@ Zeichen, für die es keine Unicode-Entsprechungen gibt, wurden im Private Use an
 
 ## Modifizierte Zeichen
 
-Einige Zeichen wurden aus ästhetischen Gründen leicht modifiziert:
+Einige Zeichen wurden aus ästhetischen Gründen leicht modifiziert. Sie sind kräftiger als in Noto und entsprechen jeweils einem schwereren Gewicht (z.B. bei Regular dem Gewicht Bold):
 
 | Zeichen | vorher | nachher |
 | --- | --- | --- |

@@ -1,0 +1,2347 @@
+# buildVariable: Build a variable font from a source file
+rule buildVariable
+  command = $
+      /tmp/claude-1000/-home-tob-gitrepos-github-nossikon/c2aeece5-4179-49c6-91b5-d36cf14e4e61/scratchpad/venv/bin/python3 $
+      -m gftools.jobrunner fontmake --output-path $out -o variable $
+      $fontmake_type $in $args $stamp
+  description = buildVariable
+
+# fix: Run gftools-fix
+rule fix
+  command = $
+      /tmp/claude-1000/-home-tob-gitrepos-github-nossikon/c2aeece5-4179-49c6-91b5-d36cf14e4e61/scratchpad/venv/bin/python3 $
+      -m gftools.jobrunner gftools-fix-font -o $out $args $in $stamp
+  description = fix
+
+# compress: Compress to webfont
+rule compress
+  command = $
+      /tmp/claude-1000/-home-tob-gitrepos-github-nossikon/c2aeece5-4179-49c6-91b5-d36cf14e4e61/scratchpad/venv/bin/python3 $
+      -m gftools.jobrunner fonttools ttLib.woff2 compress -o $out $in $stamp
+  description = compress
+
+# buildStat: Build a STAT table from one or more source files
+rule buildSTAT-operation
+  command = gftools-gen-stat --out $tempdir $args -- $in && mv $finalfile $
+      $out $stamp
+rule buildSTAT-postprocess
+  command = gftools-gen-stat --inplace $args -- $in $stamp
+
+# instantiateUfo: Create instance UFOs from a Glyphs or designspace file
+rule instantiateUfo
+  command = $
+      /tmp/claude-1000/-home-tob-gitrepos-github-nossikon/c2aeece5-4179-49c6-91b5-d36cf14e4e61/scratchpad/venv/bin/python3 $
+      -m gftools.jobrunner fontmake -i "$instance_name" -o ufo $
+      $fontmake_type $in $args $stamp
+  description = instantiateUfo
+
+# buildTTF: Build a TTF from a source file
+rule buildTTF
+  command = $
+      /tmp/claude-1000/-home-tob-gitrepos-github-nossikon/c2aeece5-4179-49c6-91b5-d36cf14e4e61/scratchpad/venv/bin/python3 $
+      -m gftools.jobrunner fontmake --output-path $out -o ttf $
+      $fontmake_type $in $args $stamp
+  description = buildTTF
+
+# autohint: Run gftools-autohint
+rule autohint
+  command = $
+      /tmp/claude-1000/-home-tob-gitrepos-github-nossikon/c2aeece5-4179-49c6-91b5-d36cf14e4e61/scratchpad/venv/bin/python3 $
+      -m gftools.jobrunner gftools-autohint $args -o $out $in $stamp
+  description = autohint
+
+# copy: Copy a file
+rule copy
+  command = $
+      /tmp/claude-1000/-home-tob-gitrepos-github-nossikon/c2aeece5-4179-49c6-91b5-d36cf14e4e61/scratchpad/venv/bin/python3 $
+      -m gftools.jobrunner cp $in $out $stamp
+  description = copy
+
+# Generating /tmp/tmpu06b5pst
+build /tmp/tmpu06b5pst: buildVariable ../build/ufo/NossikonSans.designspace
+  operation = buildVariable
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+# Generating ../build/ufo/instance_ufos/NossikonSans-Thin.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-Thin.ufo.json: instantiateUfo $
+    ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Thin
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-ExtraLight.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ExtraLight.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraLight
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-Light.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-Light.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Light
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-Regular.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-Regular.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Regular
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-Medium.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-Medium.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Medium
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-SemiBold.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-SemiBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiBold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-Bold.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-Bold.ufo.json: instantiateUfo $
+    ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Bold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-ExtraBold.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ExtraBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraBold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-Black.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-Black.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Black
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedThin.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-SemiCondensedThin.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Thin
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraLight.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraLight.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed ExtraLight
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedLight.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-SemiCondensedLight.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Light
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-SemiCondensed.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-SemiCondensed.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedMedium.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-SemiCondensedMedium.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Medium
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedSemiBold.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedSemiBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed SemiBold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBold.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Bold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraBold.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed ExtraBold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBlack.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBlack.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Black
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-CondensedThin.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedThin.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Thin
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedExtraLight.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedExtraLight.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed ExtraLight
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-CondensedLight.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedLight.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Light
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-Condensed.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-Condensed.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-CondensedMedium.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedMedium.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Medium
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedSemiBold.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedSemiBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed SemiBold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-CondensedBold.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Bold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedExtraBold.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedExtraBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed ExtraBold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-CondensedBlack.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedBlack.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Black
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedThin.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedThin.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Thin
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraLight.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraLight.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed ExtraLight
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedLight.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedLight.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Light
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-ExtraCondensed.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ExtraCondensed.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedMedium.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedMedium.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Medium
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedSemiBold.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedSemiBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed SemiBold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBold.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Bold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraBold.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraBold.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed ExtraBold
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBlack.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBlack.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Black
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating /tmp/tmpn_0ng8f0
+build /tmp/tmpn_0ng8f0: buildVariable $
+    ../build/ufo/NossikonSans-Italic.designspace
+  operation = buildVariable
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+# Generating ../build/ufo/instance_ufos/NossikonSans-ThinItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ThinItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Thin Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-ExtraLightItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ExtraLightItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraLight Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-LightItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-LightItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Light Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-Italic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-Italic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-MediumItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-MediumItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Medium Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-SemiBoldItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-SemiBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiBold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-BoldItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-BoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Bold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-ExtraBoldItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-ExtraBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraBold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-BlackItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-BlackItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Black Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedThinItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedThinItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Thin Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraLightItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraLightItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed ExtraLight Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedLightItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedLightItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Light Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-SemiCondensedItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedMediumItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedMediumItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Medium Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedSemiBoldItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedSemiBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed SemiBold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBoldItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Bold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraBoldItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed ExtraBold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBlackItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBlackItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans SemiCondensed Black Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedThinItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedThinItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Thin Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedExtraLightItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedExtraLightItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed ExtraLight Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedLightItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedLightItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Light Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/ufo/instance_ufos/NossikonSans-CondensedItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedMediumItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedMediumItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Medium Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedSemiBoldItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedSemiBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed SemiBold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedBoldItalic.ufo.json
+build ../build/ufo/instance_ufos/NossikonSans-CondensedBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Bold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedExtraBoldItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedExtraBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed ExtraBold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-CondensedBlackItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedBlackItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans Condensed Black Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedThinItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedThinItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Thin Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraLightItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraLightItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed ExtraLight Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedLightItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedLightItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Light Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedMediumItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedMediumItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Medium Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedSemiBoldItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedSemiBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed SemiBold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBoldItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Bold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraBoldItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraBoldItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed ExtraBold Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating
+# ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBlackItalic.ufo.json
+build $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBlackItalic.ufo.json: $
+    instantiateUfo ../build/ufo/NossikonSans-Italic.designspace
+  operation = instantiateUfo
+  instance_name = Nossikon Sans ExtraCondensed Black Italic
+  fontmake_type = -m
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --output-dir ../build/ufo/instance_ufos
+# Generating ../build/fonts/webfonts/NossikonSans[wdth,wght].woff2
+build ../build/fonts/webfonts/NossikonSans[wdth,wght].woff2: compress $
+    ../build/fonts/variable/NossikonSans[wdth,wght].ttf
+  operation = compress
+# Postprocessing  with BuildSTAT
+build /tmp/tmpq4rkekms.buildStatstamp: buildSTAT-postprocess $
+    ../build/fonts/variable/NossikonSans[wdth,wght].ttf $
+    ../build/fonts/variable/NossikonSans-Italic[wdth,wght].ttf | $
+    ../build/fonts/variable/NossikonSans[wdth,wght].ttf $
+    ../build/fonts/variable/NossikonSans-Italic[wdth,wght].ttf
+  stamp =  && touch /tmp/tmpq4rkekms.buildStatstamp
+  postprocess = buildStat
+# Generating ../build/fonts/webfonts/NossikonSans-Italic[wdth,wght].woff2
+build ../build/fonts/webfonts/NossikonSans-Italic[wdth,wght].woff2: $
+    compress ../build/fonts/variable/NossikonSans-Italic[wdth,wght].ttf | $
+    /tmp/tmpq4rkekms.buildStatstamp
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-Thin.woff2
+build ../build/fonts/webfonts/NossikonSans-Thin.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-Thin.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraLight.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraLight.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-ExtraLight.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-Light.woff2
+build ../build/fonts/webfonts/NossikonSans-Light.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-Light.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-Regular.woff2
+build ../build/fonts/webfonts/NossikonSans-Regular.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-Regular.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-Medium.woff2
+build ../build/fonts/webfonts/NossikonSans-Medium.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-Medium.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiBold.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiBold.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-SemiBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-Bold.woff2
+build ../build/fonts/webfonts/NossikonSans-Bold.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-Bold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraBold.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraBold.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-ExtraBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-Black.woff2
+build ../build/fonts/webfonts/NossikonSans-Black.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-Black.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiCondensedThin.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedThin.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedThin.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraLight.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraLight.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedExtraLight.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiCondensedLight.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedLight.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedLight.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiCondensed.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensed.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-SemiCondensed.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiCondensedMedium.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedMedium.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedMedium.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiCondensedSemiBold.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedSemiBold.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedSemiBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiCondensedBold.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedBold.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraBold.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraBold.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedExtraBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiCondensedBlack.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedBlack.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedBlack.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedThin.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedThin.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-CondensedThin.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedExtraLight.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedExtraLight.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedExtraLight.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedLight.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedLight.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-CondensedLight.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-Condensed.woff2
+build ../build/fonts/webfonts/NossikonSans-Condensed.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-Condensed.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedMedium.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedMedium.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-CondensedMedium.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedSemiBold.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedSemiBold.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedSemiBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedBold.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedBold.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-CondensedBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedExtraBold.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedExtraBold.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedExtraBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedBlack.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedBlack.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-CondensedBlack.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraCondensedThin.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedThin.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedThin.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraLight.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraLight.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraLight.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraCondensedLight.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedLight.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedLight.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraCondensed.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensed.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-ExtraCondensed.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraCondensedMedium.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedMedium.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedMedium.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraCondensedSemiBold.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedSemiBold.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedSemiBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraCondensedBold.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedBold.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedBold.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraBold.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraBold.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraBold.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraCondensedBlack.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedBlack.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedBlack.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ThinItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-ThinItalic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-ThinItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraLightItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraLightItalic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-ExtraLightItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-LightItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-LightItalic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-LightItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-Italic.woff2
+build ../build/fonts/webfonts/NossikonSans-Italic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-Italic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-MediumItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-MediumItalic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-MediumItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiBoldItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiBoldItalic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-SemiBoldItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-BoldItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-BoldItalic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-BoldItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraBoldItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraBoldItalic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-ExtraBoldItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-BlackItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-BlackItalic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-BlackItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-SemiCondensedThinItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedThinItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedThinItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraLightItalic.woff2
+build $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraLightItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedExtraLightItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-SemiCondensedLightItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedLightItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedLightItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-SemiCondensedItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-SemiCondensedMediumItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedMediumItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedMediumItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-SemiCondensedSemiBoldItalic.woff2
+build $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedSemiBoldItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedSemiBoldItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-SemiCondensedBoldItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedBoldItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedBoldItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraBoldItalic.woff2
+build $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraBoldItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedExtraBoldItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-SemiCondensedBlackItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-SemiCondensedBlackItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-SemiCondensedBlackItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedThinItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedThinItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedThinItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-CondensedExtraLightItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedExtraLightItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedExtraLightItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedLightItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedLightItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedLightItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedItalic.woff2: compress $
+    ../build/fonts/ttf/NossikonSans-CondensedItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedMediumItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedMediumItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedMediumItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-CondensedSemiBoldItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedSemiBoldItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedSemiBoldItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedBoldItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedBoldItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedBoldItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-CondensedExtraBoldItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedExtraBoldItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedExtraBoldItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-CondensedBlackItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-CondensedBlackItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-CondensedBlackItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedThinItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedThinItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedThinItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraLightItalic.woff2
+build $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraLightItalic.woff2: $
+    compress $
+    ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraLightItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedLightItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedLightItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedLightItalic.ttf
+  operation = compress
+# Generating ../build/fonts/webfonts/NossikonSans-ExtraCondensedItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedMediumItalic.woff2
+build $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedMediumItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedMediumItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedSemiBoldItalic.woff2
+build $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedSemiBoldItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedSemiBoldItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedBoldItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedBoldItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedBoldItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraBoldItalic.woff2
+build $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraBoldItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraBoldItalic.ttf
+  operation = compress
+# Generating
+# ../build/fonts/webfonts/NossikonSans-ExtraCondensedBlackItalic.woff2
+build ../build/fonts/webfonts/NossikonSans-ExtraCondensedBlackItalic.woff2: $
+    compress ../build/fonts/ttf/NossikonSans-ExtraCondensedBlackItalic.ttf
+  operation = compress
+# Generating ../build/fonts/variable/NossikonSans[wdth,wght].ttf
+build ../build/fonts/variable/NossikonSans[wdth,wght].ttf: fix $
+    /tmp/tmpu06b5pst
+  operation = fix
+  args = 
+# Generating ../build/fonts/variable/NossikonSans-Italic[wdth,wght].ttf
+build ../build/fonts/variable/NossikonSans-Italic[wdth,wght].ttf: fix $
+    /tmp/tmpn_0ng8f0
+  operation = fix
+  args = 
+# Generating /tmp/tmpbwt6nt4_
+build /tmp/tmpbwt6nt4_: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-Thin.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp28q4ui3g
+build /tmp/tmp28q4ui3g: autohint /tmp/tmpbwt6nt4_
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-Thin.ttf
+build ../build/fonts/ttf/NossikonSans-Thin.ttf: fix /tmp/tmp28q4ui3g
+  operation = fix
+  args = 
+# Generating /tmp/tmprqrgcyuf
+build /tmp/tmprqrgcyuf: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp6imah__r
+build /tmp/tmp6imah__r: autohint /tmp/tmprqrgcyuf
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraLight.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraLight.ttf: fix /tmp/tmp6imah__r
+  operation = fix
+  args = 
+# Generating /tmp/tmp0o8scv5c
+build /tmp/tmp0o8scv5c: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-Light.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpn32f7jga
+build /tmp/tmpn32f7jga: autohint /tmp/tmp0o8scv5c
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-Light.ttf
+build ../build/fonts/ttf/NossikonSans-Light.ttf: fix /tmp/tmpn32f7jga
+  operation = fix
+  args = 
+# Generating /tmp/tmpx7fyfdug
+build /tmp/tmpx7fyfdug: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-Regular.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpcxy0t7yw
+build /tmp/tmpcxy0t7yw: autohint /tmp/tmpx7fyfdug
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-Regular.ttf
+build ../build/fonts/ttf/NossikonSans-Regular.ttf: fix /tmp/tmpcxy0t7yw
+  operation = fix
+  args = 
+# Generating /tmp/tmpxybzuz5c
+build /tmp/tmpxybzuz5c: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-Medium.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpikvfjrej
+build /tmp/tmpikvfjrej: autohint /tmp/tmpxybzuz5c
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-Medium.ttf
+build ../build/fonts/ttf/NossikonSans-Medium.ttf: fix /tmp/tmpikvfjrej
+  operation = fix
+  args = 
+# Generating /tmp/tmpfqskbt1g
+build /tmp/tmpfqskbt1g: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpwxwantvl
+build /tmp/tmpwxwantvl: autohint /tmp/tmpfqskbt1g
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiBold.ttf
+build ../build/fonts/ttf/NossikonSans-SemiBold.ttf: fix /tmp/tmpwxwantvl
+  operation = fix
+  args = 
+# Generating /tmp/tmpwl_t5y5y
+build /tmp/tmpwl_t5y5y: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-Bold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpo2cz2he1
+build /tmp/tmpo2cz2he1: autohint /tmp/tmpwl_t5y5y
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-Bold.ttf
+build ../build/fonts/ttf/NossikonSans-Bold.ttf: fix /tmp/tmpo2cz2he1
+  operation = fix
+  args = 
+# Generating /tmp/tmpjfcxbd0_
+build /tmp/tmpjfcxbd0_: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpv1tntzq_
+build /tmp/tmpv1tntzq_: autohint /tmp/tmpjfcxbd0_
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraBold.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraBold.ttf: fix /tmp/tmpv1tntzq_
+  operation = fix
+  args = 
+# Generating /tmp/tmppntfz4uj
+build /tmp/tmppntfz4uj: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-Black.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpi1a0krbi
+build /tmp/tmpi1a0krbi: autohint /tmp/tmppntfz4uj
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-Black.ttf
+build ../build/fonts/ttf/NossikonSans-Black.ttf: fix /tmp/tmpi1a0krbi
+  operation = fix
+  args = 
+# Generating /tmp/tmpa9_abng6
+build /tmp/tmpa9_abng6: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedThin.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpa947wtsg
+build /tmp/tmpa947wtsg: autohint /tmp/tmpa9_abng6
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedThin.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedThin.ttf: fix $
+    /tmp/tmpa947wtsg
+  operation = fix
+  args = 
+# Generating /tmp/tmpicakdwn0
+build /tmp/tmpicakdwn0: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmppnarqddz
+build /tmp/tmppnarqddz: autohint /tmp/tmpicakdwn0
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedExtraLight.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedExtraLight.ttf: fix $
+    /tmp/tmppnarqddz
+  operation = fix
+  args = 
+# Generating /tmp/tmp3kg9qtn3
+build /tmp/tmp3kg9qtn3: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp0dpjee5s
+build /tmp/tmp0dpjee5s: autohint /tmp/tmp3kg9qtn3
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedLight.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedLight.ttf: fix $
+    /tmp/tmp0dpjee5s
+  operation = fix
+  args = 
+# Generating /tmp/tmpxv9ymsdr
+build /tmp/tmpxv9ymsdr: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensed.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp3unv5s4x
+build /tmp/tmp3unv5s4x: autohint /tmp/tmpxv9ymsdr
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensed.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensed.ttf: fix /tmp/tmp3unv5s4x
+  operation = fix
+  args = 
+# Generating /tmp/tmp8yqxa2_r
+build /tmp/tmp8yqxa2_r: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedMedium.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp0z22abeo
+build /tmp/tmp0z22abeo: autohint /tmp/tmp8yqxa2_r
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedMedium.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedMedium.ttf: fix $
+    /tmp/tmp0z22abeo
+  operation = fix
+  args = 
+# Generating /tmp/tmpb7j7nmw9
+build /tmp/tmpb7j7nmw9: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedSemiBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpqeiuux0_
+build /tmp/tmpqeiuux0_: autohint /tmp/tmpb7j7nmw9
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedSemiBold.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedSemiBold.ttf: fix $
+    /tmp/tmpqeiuux0_
+  operation = fix
+  args = 
+# Generating /tmp/tmpu82bbr9m
+build /tmp/tmpu82bbr9m: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpvf2_tnix
+build /tmp/tmpvf2_tnix: autohint /tmp/tmpu82bbr9m
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedBold.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedBold.ttf: fix $
+    /tmp/tmpvf2_tnix
+  operation = fix
+  args = 
+# Generating /tmp/tmpp_yn0j_l
+build /tmp/tmpp_yn0j_l: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp3s_ugt_o
+build /tmp/tmp3s_ugt_o: autohint /tmp/tmpp_yn0j_l
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedExtraBold.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedExtraBold.ttf: fix $
+    /tmp/tmp3s_ugt_o
+  operation = fix
+  args = 
+# Generating /tmp/tmpjn0it_29
+build /tmp/tmpjn0it_29: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBlack.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpvb3jq7mh
+build /tmp/tmpvb3jq7mh: autohint /tmp/tmpjn0it_29
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedBlack.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedBlack.ttf: fix $
+    /tmp/tmpvb3jq7mh
+  operation = fix
+  args = 
+# Generating /tmp/tmpg041y8u4
+build /tmp/tmpg041y8u4: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedThin.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp0d7dlsnm
+build /tmp/tmp0d7dlsnm: autohint /tmp/tmpg041y8u4
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedThin.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedThin.ttf: fix /tmp/tmp0d7dlsnm
+  operation = fix
+  args = 
+# Generating /tmp/tmpxcfu5xhu
+build /tmp/tmpxcfu5xhu: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedExtraLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp6eqwjkpz
+build /tmp/tmp6eqwjkpz: autohint /tmp/tmpxcfu5xhu
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedExtraLight.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedExtraLight.ttf: fix $
+    /tmp/tmp6eqwjkpz
+  operation = fix
+  args = 
+# Generating /tmp/tmpq7cxo0wn
+build /tmp/tmpq7cxo0wn: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpk0clcj29
+build /tmp/tmpk0clcj29: autohint /tmp/tmpq7cxo0wn
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedLight.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedLight.ttf: fix /tmp/tmpk0clcj29
+  operation = fix
+  args = 
+# Generating /tmp/tmpcpxr5gq_
+build /tmp/tmpcpxr5gq_: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-Condensed.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpjwiwg1qv
+build /tmp/tmpjwiwg1qv: autohint /tmp/tmpcpxr5gq_
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-Condensed.ttf
+build ../build/fonts/ttf/NossikonSans-Condensed.ttf: fix /tmp/tmpjwiwg1qv
+  operation = fix
+  args = 
+# Generating /tmp/tmpn97_sji1
+build /tmp/tmpn97_sji1: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedMedium.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp7_1j7sab
+build /tmp/tmp7_1j7sab: autohint /tmp/tmpn97_sji1
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedMedium.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedMedium.ttf: fix $
+    /tmp/tmp7_1j7sab
+  operation = fix
+  args = 
+# Generating /tmp/tmp0mr3pe91
+build /tmp/tmp0mr3pe91: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedSemiBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpae7jlrba
+build /tmp/tmpae7jlrba: autohint /tmp/tmp0mr3pe91
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedSemiBold.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedSemiBold.ttf: fix $
+    /tmp/tmpae7jlrba
+  operation = fix
+  args = 
+# Generating /tmp/tmpkcvnpuug
+build /tmp/tmpkcvnpuug: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpu71hwcuv
+build /tmp/tmpu71hwcuv: autohint /tmp/tmpkcvnpuug
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedBold.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedBold.ttf: fix /tmp/tmpu71hwcuv
+  operation = fix
+  args = 
+# Generating /tmp/tmp11_4hd_o
+build /tmp/tmp11_4hd_o: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedExtraBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpjch95r1m
+build /tmp/tmpjch95r1m: autohint /tmp/tmp11_4hd_o
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedExtraBold.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedExtraBold.ttf: fix $
+    /tmp/tmpjch95r1m
+  operation = fix
+  args = 
+# Generating /tmp/tmpp74kl74n
+build /tmp/tmpp74kl74n: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedBlack.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpjjao0jp3
+build /tmp/tmpjjao0jp3: autohint /tmp/tmpp74kl74n
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedBlack.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedBlack.ttf: fix /tmp/tmpjjao0jp3
+  operation = fix
+  args = 
+# Generating /tmp/tmpqa3ad0p8
+build /tmp/tmpqa3ad0p8: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedThin.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpkm9e6gps
+build /tmp/tmpkm9e6gps: autohint /tmp/tmpqa3ad0p8
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedThin.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedThin.ttf: fix $
+    /tmp/tmpkm9e6gps
+  operation = fix
+  args = 
+# Generating /tmp/tmpej8su72l
+build /tmp/tmpej8su72l: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpjkjtpus0
+build /tmp/tmpjkjtpus0: autohint /tmp/tmpej8su72l
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraLight.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraLight.ttf: fix $
+    /tmp/tmpjkjtpus0
+  operation = fix
+  args = 
+# Generating /tmp/tmp17vhonyl
+build /tmp/tmp17vhonyl: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpkqsxrx1u
+build /tmp/tmpkqsxrx1u: autohint /tmp/tmp17vhonyl
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedLight.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedLight.ttf: fix $
+    /tmp/tmpkqsxrx1u
+  operation = fix
+  args = 
+# Generating /tmp/tmpfzucme59
+build /tmp/tmpfzucme59: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensed.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpsks6ob54
+build /tmp/tmpsks6ob54: autohint /tmp/tmpfzucme59
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensed.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensed.ttf: fix /tmp/tmpsks6ob54
+  operation = fix
+  args = 
+# Generating /tmp/tmpylg42nzf
+build /tmp/tmpylg42nzf: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedMedium.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpvzs8dcbx
+build /tmp/tmpvzs8dcbx: autohint /tmp/tmpylg42nzf
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedMedium.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedMedium.ttf: fix $
+    /tmp/tmpvzs8dcbx
+  operation = fix
+  args = 
+# Generating /tmp/tmpjhm1rfbh
+build /tmp/tmpjhm1rfbh: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedSemiBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpryd04g4i
+build /tmp/tmpryd04g4i: autohint /tmp/tmpjhm1rfbh
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedSemiBold.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedSemiBold.ttf: fix $
+    /tmp/tmpryd04g4i
+  operation = fix
+  args = 
+# Generating /tmp/tmpp2q5k9g7
+build /tmp/tmpp2q5k9g7: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpu4mkcay2
+build /tmp/tmpu4mkcay2: autohint /tmp/tmpp2q5k9g7
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedBold.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedBold.ttf: fix $
+    /tmp/tmpu4mkcay2
+  operation = fix
+  args = 
+# Generating /tmp/tmpwz090_3_
+build /tmp/tmpwz090_3_: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp3fmokpx1
+build /tmp/tmp3fmokpx1: autohint /tmp/tmpwz090_3_
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraBold.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraBold.ttf: fix $
+    /tmp/tmp3fmokpx1
+  operation = fix
+  args = 
+# Generating /tmp/tmpmo2sgulx
+build /tmp/tmpmo2sgulx: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBlack.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpawpsaxmw
+build /tmp/tmpawpsaxmw: autohint /tmp/tmpmo2sgulx
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedBlack.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedBlack.ttf: fix $
+    /tmp/tmpawpsaxmw
+  operation = fix
+  args = 
+# Generating /tmp/tmp4ovmq98d
+build /tmp/tmp4ovmq98d: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ThinItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp94bjxo2u
+build /tmp/tmp94bjxo2u: autohint /tmp/tmp4ovmq98d
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ThinItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ThinItalic.ttf: fix /tmp/tmp94bjxo2u
+  operation = fix
+  args = 
+# Generating /tmp/tmp28jejr2o
+build /tmp/tmp28jejr2o: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraLightItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp76umre86
+build /tmp/tmp76umre86: autohint /tmp/tmp28jejr2o
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraLightItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraLightItalic.ttf: fix $
+    /tmp/tmp76umre86
+  operation = fix
+  args = 
+# Generating /tmp/tmpkejpbtcs
+build /tmp/tmpkejpbtcs: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-LightItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp1sz4yult
+build /tmp/tmp1sz4yult: autohint /tmp/tmpkejpbtcs
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-LightItalic.ttf
+build ../build/fonts/ttf/NossikonSans-LightItalic.ttf: fix /tmp/tmp1sz4yult
+  operation = fix
+  args = 
+# Generating /tmp/tmpk_ggkmsh
+build /tmp/tmpk_ggkmsh: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-Italic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpa0hhc8bv
+build /tmp/tmpa0hhc8bv: autohint /tmp/tmpk_ggkmsh
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-Italic.ttf
+build ../build/fonts/ttf/NossikonSans-Italic.ttf: fix /tmp/tmpa0hhc8bv
+  operation = fix
+  args = 
+# Generating /tmp/tmp4rcopx8r
+build /tmp/tmp4rcopx8r: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-MediumItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpa_lb9etr
+build /tmp/tmpa_lb9etr: autohint /tmp/tmp4rcopx8r
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-MediumItalic.ttf
+build ../build/fonts/ttf/NossikonSans-MediumItalic.ttf: fix /tmp/tmpa_lb9etr
+  operation = fix
+  args = 
+# Generating /tmp/tmpu7a94o_0
+build /tmp/tmpu7a94o_0: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp8svp1tjc
+build /tmp/tmp8svp1tjc: autohint /tmp/tmpu7a94o_0
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiBoldItalic.ttf: fix /tmp/tmp8svp1tjc
+  operation = fix
+  args = 
+# Generating /tmp/tmpj84wef63
+build /tmp/tmpj84wef63: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-BoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpmgwde07u
+build /tmp/tmpmgwde07u: autohint /tmp/tmpj84wef63
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-BoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-BoldItalic.ttf: fix /tmp/tmpmgwde07u
+  operation = fix
+  args = 
+# Generating /tmp/tmpolpnzy0q
+build /tmp/tmpolpnzy0q: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpcxqs0_h5
+build /tmp/tmpcxqs0_h5: autohint /tmp/tmpolpnzy0q
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraBoldItalic.ttf: fix $
+    /tmp/tmpcxqs0_h5
+  operation = fix
+  args = 
+# Generating /tmp/tmp1t1ihm6r
+build /tmp/tmp1t1ihm6r: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-BlackItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmps46s313m
+build /tmp/tmps46s313m: autohint /tmp/tmp1t1ihm6r
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-BlackItalic.ttf
+build ../build/fonts/ttf/NossikonSans-BlackItalic.ttf: fix /tmp/tmps46s313m
+  operation = fix
+  args = 
+# Generating /tmp/tmpf_4_gky3
+build /tmp/tmpf_4_gky3: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedThinItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpvrr4we2k
+build /tmp/tmpvrr4we2k: autohint /tmp/tmpf_4_gky3
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedThinItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedThinItalic.ttf: fix $
+    /tmp/tmpvrr4we2k
+  operation = fix
+  args = 
+# Generating /tmp/tmpxv3zw5_b
+build /tmp/tmpxv3zw5_b: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraLightItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpenr6xptt
+build /tmp/tmpenr6xptt: autohint /tmp/tmpxv3zw5_b
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedExtraLightItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedExtraLightItalic.ttf: $
+    fix /tmp/tmpenr6xptt
+  operation = fix
+  args = 
+# Generating /tmp/tmpqygveznz
+build /tmp/tmpqygveznz: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedLightItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpfl3q20yo
+build /tmp/tmpfl3q20yo: autohint /tmp/tmpqygveznz
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedLightItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedLightItalic.ttf: fix $
+    /tmp/tmpfl3q20yo
+  operation = fix
+  args = 
+# Generating /tmp/tmp2bkx4o08
+build /tmp/tmp2bkx4o08: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmph8xldh23
+build /tmp/tmph8xldh23: autohint /tmp/tmp2bkx4o08
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedItalic.ttf: fix $
+    /tmp/tmph8xldh23
+  operation = fix
+  args = 
+# Generating /tmp/tmp9y2f4nun
+build /tmp/tmp9y2f4nun: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedMediumItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp9j76pbj2
+build /tmp/tmp9j76pbj2: autohint /tmp/tmp9y2f4nun
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedMediumItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedMediumItalic.ttf: fix $
+    /tmp/tmp9j76pbj2
+  operation = fix
+  args = 
+# Generating /tmp/tmp4vyrevi6
+build /tmp/tmp4vyrevi6: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedSemiBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmptt8lnw73
+build /tmp/tmptt8lnw73: autohint /tmp/tmp4vyrevi6
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedSemiBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedSemiBoldItalic.ttf: fix $
+    /tmp/tmptt8lnw73
+  operation = fix
+  args = 
+# Generating /tmp/tmp4kvlb13q
+build /tmp/tmp4kvlb13q: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpbflfyteq
+build /tmp/tmpbflfyteq: autohint /tmp/tmp4kvlb13q
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedBoldItalic.ttf: fix $
+    /tmp/tmpbflfyteq
+  operation = fix
+  args = 
+# Generating /tmp/tmpzgd2exfm
+build /tmp/tmpzgd2exfm: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedExtraBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp94xjha96
+build /tmp/tmp94xjha96: autohint /tmp/tmpzgd2exfm
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedExtraBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedExtraBoldItalic.ttf: fix $
+    /tmp/tmp94xjha96
+  operation = fix
+  args = 
+# Generating /tmp/tmp9vyrfp6o
+build /tmp/tmp9vyrfp6o: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-SemiCondensedBlackItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp6akdjiqe
+build /tmp/tmp6akdjiqe: autohint /tmp/tmp9vyrfp6o
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-SemiCondensedBlackItalic.ttf
+build ../build/fonts/ttf/NossikonSans-SemiCondensedBlackItalic.ttf: fix $
+    /tmp/tmp6akdjiqe
+  operation = fix
+  args = 
+# Generating /tmp/tmptkmv4dtx
+build /tmp/tmptkmv4dtx: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedThinItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp08apt6pa
+build /tmp/tmp08apt6pa: autohint /tmp/tmptkmv4dtx
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedThinItalic.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedThinItalic.ttf: fix $
+    /tmp/tmp08apt6pa
+  operation = fix
+  args = 
+# Generating /tmp/tmpoqted4nv
+build /tmp/tmpoqted4nv: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedExtraLightItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp7wb_69ja
+build /tmp/tmp7wb_69ja: autohint /tmp/tmpoqted4nv
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedExtraLightItalic.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedExtraLightItalic.ttf: fix $
+    /tmp/tmp7wb_69ja
+  operation = fix
+  args = 
+# Generating /tmp/tmpewtaguee
+build /tmp/tmpewtaguee: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedLightItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp_ah__woj
+build /tmp/tmp_ah__woj: autohint /tmp/tmpewtaguee
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedLightItalic.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedLightItalic.ttf: fix $
+    /tmp/tmp_ah__woj
+  operation = fix
+  args = 
+# Generating /tmp/tmp_tf8_g_r
+build /tmp/tmp_tf8_g_r: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpfipc7fob
+build /tmp/tmpfipc7fob: autohint /tmp/tmp_tf8_g_r
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedItalic.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedItalic.ttf: fix $
+    /tmp/tmpfipc7fob
+  operation = fix
+  args = 
+# Generating /tmp/tmpanjrxde0
+build /tmp/tmpanjrxde0: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedMediumItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpu8y5sjvw
+build /tmp/tmpu8y5sjvw: autohint /tmp/tmpanjrxde0
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedMediumItalic.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedMediumItalic.ttf: fix $
+    /tmp/tmpu8y5sjvw
+  operation = fix
+  args = 
+# Generating /tmp/tmp6bex_zlh
+build /tmp/tmp6bex_zlh: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedSemiBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpiiz_6ptt
+build /tmp/tmpiiz_6ptt: autohint /tmp/tmp6bex_zlh
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedSemiBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedSemiBoldItalic.ttf: fix $
+    /tmp/tmpiiz_6ptt
+  operation = fix
+  args = 
+# Generating /tmp/tmp_4_n6jz7
+build /tmp/tmp_4_n6jz7: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpdrogw2ep
+build /tmp/tmpdrogw2ep: autohint /tmp/tmp_4_n6jz7
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedBoldItalic.ttf: fix $
+    /tmp/tmpdrogw2ep
+  operation = fix
+  args = 
+# Generating /tmp/tmpb_mw5t7n
+build /tmp/tmpb_mw5t7n: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedExtraBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpq__ig0bo
+build /tmp/tmpq__ig0bo: autohint /tmp/tmpb_mw5t7n
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedExtraBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedExtraBoldItalic.ttf: fix $
+    /tmp/tmpq__ig0bo
+  operation = fix
+  args = 
+# Generating /tmp/tmpgt6b3xym
+build /tmp/tmpgt6b3xym: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-CondensedBlackItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpvrmw7i7d
+build /tmp/tmpvrmw7i7d: autohint /tmp/tmpgt6b3xym
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-CondensedBlackItalic.ttf
+build ../build/fonts/ttf/NossikonSans-CondensedBlackItalic.ttf: fix $
+    /tmp/tmpvrmw7i7d
+  operation = fix
+  args = 
+# Generating /tmp/tmp08hgoag1
+build /tmp/tmp08hgoag1: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedThinItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpvo52ysr_
+build /tmp/tmpvo52ysr_: autohint /tmp/tmp08hgoag1
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedThinItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedThinItalic.ttf: fix $
+    /tmp/tmpvo52ysr_
+  operation = fix
+  args = 
+# Generating /tmp/tmpf3dain_o
+build /tmp/tmpf3dain_o: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraLightItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpg5vqfqvo
+build /tmp/tmpg5vqfqvo: autohint /tmp/tmpf3dain_o
+  operation = autohint
+  args = --fail-ok 
+# Generating
+# ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraLightItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraLightItalic.ttf: $
+    fix /tmp/tmpg5vqfqvo
+  operation = fix
+  args = 
+# Generating /tmp/tmp4cmu75oo
+build /tmp/tmp4cmu75oo: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedLightItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpdz800vte
+build /tmp/tmpdz800vte: autohint /tmp/tmp4cmu75oo
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedLightItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedLightItalic.ttf: fix $
+    /tmp/tmpdz800vte
+  operation = fix
+  args = 
+# Generating /tmp/tmpw4yedqzx
+build /tmp/tmpw4yedqzx: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpur2vkdmx
+build /tmp/tmpur2vkdmx: autohint /tmp/tmpw4yedqzx
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedItalic.ttf: fix $
+    /tmp/tmpur2vkdmx
+  operation = fix
+  args = 
+# Generating /tmp/tmpr3_g1p0c
+build /tmp/tmpr3_g1p0c: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedMediumItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpa8wxhc14
+build /tmp/tmpa8wxhc14: autohint /tmp/tmpr3_g1p0c
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedMediumItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedMediumItalic.ttf: fix $
+    /tmp/tmpa8wxhc14
+  operation = fix
+  args = 
+# Generating /tmp/tmptbvraa3g
+build /tmp/tmptbvraa3g: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedSemiBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpcmbf_m09
+build /tmp/tmpcmbf_m09: autohint /tmp/tmptbvraa3g
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedSemiBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedSemiBoldItalic.ttf: fix $
+    /tmp/tmpcmbf_m09
+  operation = fix
+  args = 
+# Generating /tmp/tmpytm6yhgz
+build /tmp/tmpytm6yhgz: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmpcqf_47d4
+build /tmp/tmpcqf_47d4: autohint /tmp/tmpytm6yhgz
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedBoldItalic.ttf: fix $
+    /tmp/tmpcqf_47d4
+  operation = fix
+  args = 
+# Generating /tmp/tmpall_34al
+build /tmp/tmpall_34al: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedExtraBoldItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp5ed1idn0
+build /tmp/tmp5ed1idn0: autohint /tmp/tmpall_34al
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraBoldItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedExtraBoldItalic.ttf: $
+    fix /tmp/tmp5ed1idn0
+  operation = fix
+  args = 
+# Generating /tmp/tmpphgdtyjb
+build /tmp/tmpphgdtyjb: buildTTF $
+    ../build/ufo/instance_ufos/NossikonSans-ExtraCondensedBlackItalic.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /tmp/tmp8ao8c29k
+build /tmp/tmp8ao8c29k: autohint /tmp/tmpphgdtyjb
+  operation = autohint
+  args = --fail-ok 
+# Generating ../build/fonts/ttf/NossikonSans-ExtraCondensedBlackItalic.ttf
+build ../build/fonts/ttf/NossikonSans-ExtraCondensedBlackItalic.ttf: fix $
+    /tmp/tmp8ao8c29k
+  operation = fix
+  args = 
+default ../build/fonts/webfonts/NossikonSans[wdth,wght].woff2 $
+    /tmp/tmpq4rkekms.buildStatstamp $
+    ../build/fonts/webfonts/NossikonSans-Italic[wdth,wght].woff2 $
+    ../build/fonts/webfonts/NossikonSans-Thin.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraLight.woff2 $
+    ../build/fonts/webfonts/NossikonSans-Light.woff2 $
+    ../build/fonts/webfonts/NossikonSans-Regular.woff2 $
+    ../build/fonts/webfonts/NossikonSans-Medium.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-Bold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-Black.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedThin.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraLight.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedLight.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensed.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedMedium.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedSemiBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedBlack.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedThin.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedExtraLight.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedLight.woff2 $
+    ../build/fonts/webfonts/NossikonSans-Condensed.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedMedium.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedSemiBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedExtraBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedBlack.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedThin.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraLight.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedLight.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensed.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedMedium.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedSemiBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraBold.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedBlack.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ThinItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraLightItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-LightItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-Italic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-MediumItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-BoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-BlackItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedThinItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraLightItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedLightItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedMediumItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedSemiBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedExtraBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-SemiCondensedBlackItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedThinItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedExtraLightItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedLightItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedMediumItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedSemiBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedExtraBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-CondensedBlackItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedThinItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraLightItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedLightItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedMediumItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedSemiBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedExtraBoldItalic.woff2 $
+    ../build/fonts/webfonts/NossikonSans-ExtraCondensedBlackItalic.woff2
