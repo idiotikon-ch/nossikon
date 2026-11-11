@@ -20,9 +20,19 @@ Die folgenden Beispiele stammen aus der [Datenbank des Portals der schweizerisch
 *\*podjo > \*püög̓́ > \*púog̓́ > \*púəg̓́*{:.char-display}  
 *de Schoͤngoͤwe, apud Schongoͧwe*{:.char-display}  
 
+## Nossikon Serif
+
+{:.nossikon-serif}
+*əm tu᪷rən ọbə, vọm rọ̄utətúrᵃᵉ*{:.char-display}  
+*í᪷n̄dərlaχχə*{:.char-display}  
+*[ivɛʀdɔ̃], [ɛ̃ vɛrˈdɔ̃]*{:style="font-style: normal"}{:.char-display}  
+*\*podjo > \*püög̓́ > \*púog̓́ > \*púəg̓́*{:.char-display}  
+*de Schoͤngoͤwe, apud Schongoͧwe*{:.char-display}  
+
 ## Gewichte und Breiten
 
 <div class="axis-controls">
+  <label>Familie <select id="family"><option>Nossikon Sans</option><option>Nossikon Serif</option></select></label>
   <label>Gewicht <input type="range" id="wght" min="100" max="900" value="400"> <output id="wght-value">400</output></label>
   <label>Breite <input type="range" id="wdth" min="62.5" max="100" step="0.5" value="100"> <output id="wdth-value">100</output> %</label>
   <label><input type="checkbox" id="ital"> kursiv</label>
@@ -36,14 +46,16 @@ Die folgenden Beispiele stammen aus der [Datenbank des Portals der schweizerisch
     var wght = document.getElementById('wght');
     var wdth = document.getElementById('wdth');
     var ital = document.getElementById('ital');
+    var family = document.getElementById('family');
     function update() {
+      sample.style.fontFamily = "'" + family.value + "'";
       sample.style.fontWeight = wght.value;
       sample.style.fontStretch = wdth.value + '%';
       sample.style.fontStyle = ital.checked ? 'italic' : 'normal';
       document.getElementById('wght-value').textContent = wght.value;
       document.getElementById('wdth-value').textContent = wdth.value;
     }
-    [wght, wdth, ital].forEach(function (el) { el.addEventListener('input', update); });
+    [family, wght, wdth, ital].forEach(function (el) { el.addEventListener('input', update); });
     update();
   })();
 </script>

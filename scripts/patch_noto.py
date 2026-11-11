@@ -25,7 +25,10 @@ COMBINING_LETTERS = [
 # Nossikon uses the combining letters U+0363-036F of a heavier weight
 # (Regular -> Bold, Bold -> ExtraBold); keys and values are design
 # coordinates of the weight axis.
-COMBINING_LETTER_WEIGHTS = {26: 44, 90: 151, 151: 169, 190: 190}
+COMBINING_LETTER_WEIGHTS = {
+    'Nossikon Sans': {26: 44, 90: 151, 151: 169, 190: 190},
+    'Nossikon Serif': {28: 45, 94: 152, 152: 175, 194: 194},
+}
 
 MOD_LIGATURES = [
     ('uni1D43_uni0308', 'amod', 'dieresiscomb', 'top'),
@@ -158,7 +161,7 @@ def set_glyph(layer, name, width, contours=(), components=(), anchors=None):
         glyph.anchors.append(Anchor(round(x), round(y), n))
 
 
-def build_glyphs(group, weight, slant, cmap):
+def build_glyphs(group, weight, slant, cmap, letter_weights):
     s = lambda n: group.shape(n, weight)
     glyphs = []
 
@@ -166,7 +169,7 @@ def build_glyphs(group, weight, slant, cmap):
         glyphs.append((name, width, kwargs))
 
     for name in COMBINING_LETTERS:
-        target = COMBINING_LETTER_WEIGHTS[weight]
+        target = letter_weights[weight]
         heavier = s(name) if target == weight else group.shape(name, target)
         anchors = dict(heavier.anchors)
         if 'top' not in anchors:
@@ -258,7 +261,9 @@ def patch_designspace(path):
         for weight, layer, font in members:
             slant = math.tan(math.radians(-(font.info.italicAngle or 0)))
             cmap = {u: g.name for g in font for u in g.unicodes}
-            pending.append((layer, build_glyphs(group, weight, slant, cmap)))
+            letter_weights = COMBINING_LETTER_WEIGHTS[font.info.familyName]
+            pending.append((layer, build_glyphs(group, weight, slant, cmap,
+                                                letter_weights)))
 
     for layer, glyphs in pending:
         for name, width, kwargs in glyphs:
@@ -290,7 +295,7 @@ def patch_font(font):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='apply the Nossikon modifications to Noto Sans UFO sources')
+        description='apply the Nossikon modifications to Noto UFO sources')
     parser.add_argument('designspaces', nargs='+')
     for path in parser.parse_args().designspaces:
         patch_designspace(path)

@@ -9,6 +9,7 @@ buildWebfont: true
 buildSmallCap: false
 autohintTTF: true
 outputDir: ../build/fonts
+cleanUp: true
 axisOrder:
   - wdth
   - wght

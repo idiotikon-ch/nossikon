@@ -8,7 +8,7 @@ Unicode-Fonts mit phonetischen und historischen Zeichen für die schweizerische 
 
 ## Build
 
-Die Fonts werden aus den Quellen von [Noto Sans](https://github.com/notofonts/latin-greek-cyrillic) gebaut (Version in [`scripts/build.sh`](scripts/build.sh)). [`scripts/patch_noto.py`](scripts/patch_noto.py) fügt dabei in allen Mastern die Nossikon-Zeichen und -Ligaturen ein:
+Die Fonts *Nossikon Sans* und *Nossikon Serif* werden aus den Quellen von [Noto Sans und Noto Serif](https://github.com/notofonts/latin-greek-cyrillic) gebaut (Version in [`scripts/build.sh`](scripts/build.sh)). [`scripts/patch_noto.py`](scripts/patch_noto.py) fügt dabei in allen Mastern die Nossikon-Zeichen und -Ligaturen ein:
 
 ```bash
 python3 -m venv venv

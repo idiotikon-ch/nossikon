@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nossikon Sans</title>
+<title>Nossikon</title>
 <link rel="stylesheet" href="nossikon.css">
 <style>
     :root {
@@ -149,11 +149,12 @@
 </head>
 <body>
 <main>
-    <h1>Nossikon Sans</h1>
-    <p class="lead">Variable Font mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung und die deutschsprachige Dialektologie, basierend auf Noto Sans. Gewicht 100–900, Breite 62.5–100 %, aufrecht und kursiv.</p>
+    <h1 id="family-name">Nossikon Sans</h1>
+    <p class="lead">Variable Font mit phonetischen und historischen Zeichen für die schweizerische Ortsnamenforschung und die deutschsprachige Dialektologie, basierend auf Noto Sans und Noto Serif. Gewicht 100–900, Breite 62.5–100 %, aufrecht und kursiv.</p>
 
     <h2>Ausprobieren</h2>
     <div class="controls">
+        <label>Familie <select id="family"><option>Nossikon Sans</option><option>Nossikon Serif</option></select></label>
         <label>Gewicht <input type="range" id="wght" min="100" max="900" value="400"><output id="wght-out">400</output></label>
         <label>Breite <input type="range" id="wdth" min="62.5" max="100" step="0.5" value="100"><output id="wdth-out">100 %</output></label>
         <label><input type="checkbox" id="ital"> kursiv</label>
@@ -250,7 +251,10 @@
     const wght = document.getElementById('wght');
     const wdth = document.getElementById('wdth');
     const ital = document.getElementById('ital');
+    const family = document.getElementById('family');
     const update = () => {
+        document.body.style.fontFamily = `'${family.value}', ${family.value.endsWith('Serif') ? 'serif' : 'sans-serif'}`;
+        document.getElementById('family-name').textContent = family.value;
         for (const target of [pg, weightsEl, widthsEl, ligEl, combEl]) {
             target.style.fontStyle = ital.checked ? 'italic' : 'normal';
         }
@@ -263,7 +267,7 @@
         document.getElementById('wght-out').textContent = wght.value;
         document.getElementById('wdth-out').textContent = `${wdth.value} %`;
     };
-    for (const input of [wght, wdth, ital]) input.addEventListener('input', update);
+    for (const input of [family, wght, wdth, ital]) input.addEventListener('input', update);
     update();
 </script>
 </body>

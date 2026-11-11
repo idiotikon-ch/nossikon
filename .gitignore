@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# gftools builder
+sources/build.ninja
+sources/.ninja_log

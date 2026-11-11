@@ -14,6 +14,22 @@
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'Nossikon Serif';
+    src: url('NossikonSerif-VF.woff2') format('woff2');
+    font-weight: 100 900;
+    font-stretch: 62.5% 100%;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nossikon Serif';
+    src: url('NossikonSerif-Italic-VF.woff2') format('woff2');
+    font-weight: 100 900;
+    font-stretch: 62.5% 100%;
+    font-style: italic;
+}
+
 /* kept for existing stylesheets; same as 'Nossikon Sans' with font-stretch: 87.5% */
 @font-face {
     font-family: 'Nossikon Sans SemiCondensed';
